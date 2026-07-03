@@ -1,0 +1,52 @@
+@page "/login"
+@layout EmptyLayout
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.Authorization
+@attribute [AllowAnonymous]
+@inject NavigationManager Navigation
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<PageTitle>Login — vtecPoint</PageTitle>
+
+<div class="login-page">
+    <div class="login-card">
+        <div class="login-brand">
+            <div class="login-logo">V</div>
+            <h1>vtecPoint</h1>
+            <p>ปรับแต้มสมาชิก · Reward Point Adjustment</p>
+        </div>
+
+        <form method="post" action="/account/login">
+            <div class="login-field">
+                <label>Staff Login</label>
+                <input name="StaffLogin" class="win-input" placeholder="ชื่อผู้ใช้" autocomplete="username" required />
+            </div>
+            <div class="login-field">
+                <label>Password</label>
+                <input type="password" name="StaffPassword" class="win-input" placeholder="รหัสผ่าน" autocomplete="current-password" required />
+            </div>
+
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="login-error">@errorMessage</div>
+            }
+
+            <button type="submit" class="win-btn win-btn-primary login-submit">เข้าสู่ระบบ</button>
+        </form>
+    </div>
+</div>
+
+@code {
+    private string errorMessage = "";
+
+    protected override async Task OnInitializedAsync()
+    {
+        var auth = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        if (auth.User.Identity?.IsAuthenticated == true)
+            Navigation.NavigateTo("/");
+
+        var uri = Navigation.ToAbsoluteUri(Navigation.Uri);
+        if (Microsoft.AspNetCore.WebUtilities.QueryHelpers.ParseQuery(uri.Query).TryGetValue("error", out var err))
+            errorMessage = err == "invalid" ? "ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง" : "เข้าสู่ระบบไม่สำเร็จ";
+    }
+}

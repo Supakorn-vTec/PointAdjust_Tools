@@ -1,0 +1,356 @@
+﻿@page "/"
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+@inject PointAdjustService PointAdjustService
+@inject IConfiguration Configuration
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<div class="win-toolbar">
+    <label class="win-btn win-btn-primary" style="cursor:pointer; margin:0;">
+        เปิดไฟล์ Excel
+        <InputFile OnChange="OnFileSelected" accept=".xlsx,.xls" style="display:none;" />
+    </label>
+    <div class="win-toolbar-sep"></div>
+    <button class="win-btn" disabled="@(rows.Count == 0 || isBusy)" @onclick="VerifyAsync">ตรวจสอบใหม่</button>
+    <button class="win-btn win-btn-danger" disabled="@(!canConfirm || isBusy)" @onclick="ConfirmAsync">ยืนยันปรับแต้ม</button>
+    <button class="win-btn" disabled="@isBusy" @onclick="Reset">เริ่มใหม่</button>
+    @if (isBusy)
+    {
+        <div class="win-spinner" style="margin-left:8px;"></div>
+        <span style="color:var(--win-text-muted);font-size:12px;">กำลังประมวลผล...</span>
+    }
+</div>
+
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="win-message @statusClass">
+        @if (isBusy) { <div class="win-spinner"></div> }
+        @statusMessage
+    </div>
+}
+
+<div class="win-groupbox">
+    <div class="win-groupbox-header">ตั้งค่าการปรับแต้ม</div>
+    <div class="win-groupbox-body">
+        <div class="win-staff-badge">
+            👤 Staff: <strong>@settings.StaffName</strong> (ID: @settings.StaffId)
+        </div>
+        <div class="win-form-grid">
+            <div class="win-field">
+                <label class="win-label">Point Type</label>
+                <select class="win-select" @bind="settings.PointType">
+                    @foreach (var pt in pointTypes)
+                    {
+                        <option value="@pt.Id">@pt.Id — @pt.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="win-field">
+                <label class="win-label">Sale Date</label>
+                <input type="date" class="win-input" @bind="settings.SaleDate" />
+            </div>
+            <div class="win-field">
+                <label class="win-label">ไฟล์ที่เลือก</label>
+                <div class="win-file-name">@(string.IsNullOrEmpty(selectedFileName) ? "ยังไม่ได้เลือกไฟล์ — กด 'เปิดไฟล์ Excel' ด้านบน" : selectedFileName)</div>
+            </div>
+        </div>
+        <div class="win-hint">
+            คอลัมน์ที่ต้องมีใน Excel: <code>MemberCode</code> · <code>Point</code> · <code>Note</code> (ไม่บังคับ)
+        </div>
+    </div>
+</div>
+
+@if (rows.Count > 0)
+{
+    <div class="win-stats">
+        <div class="win-stat">
+            <div class="win-stat-label">ทั้งหมด</div>
+            <div class="win-stat-value accent">@rows.Count</div>
+        </div>
+        <div class="win-stat">
+            <div class="win-stat-label">ผ่าน</div>
+            <div class="win-stat-value success">@validCount</div>
+        </div>
+        <div class="win-stat">
+            <div class="win-stat-label">ไม่ผ่าน</div>
+            <div class="win-stat-value danger">@invalidCount</div>
+        </div>
+        <div class="win-stat">
+            <div class="win-stat-label">รวม TranPoint</div>
+            <div class="win-stat-value">@totalTranPoint.ToString("N2")</div>
+        </div>
+    </div>
+
+    <div class="win-grid-wrap">
+        <div class="win-grid-toolbar">
+            <span class="win-grid-toolbar-title">ผลการตรวจสอบ</span>
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="win-label" style="margin:0;">แสดง:</span>
+                <select class="win-select" style="height:26px;font-size:12px;" @bind="filterMode">
+                    <option value="all">ทั้งหมด (@rows.Count)</option>
+                    <option value="valid">เฉพาะที่ผ่าน (@validCount)</option>
+                    <option value="invalid">เฉพาะที่ไม่ผ่าน (@invalidCount)</option>
+                </select>
+            </div>
+        </div>
+        <div class="win-grid-scroll">
+            <table class="win-grid">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">#</th>
+                        <th>MemberCode</th>
+                        <th>ชื่อสมาชิก</th>
+                        <th>CardNo</th>
+                        <th class="num">Previous</th>
+                        <th class="num">TranPoint</th>
+                        <th class="num">Balance</th>
+                        <th>Note</th>
+                        <th style="width:120px;">สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var row in FilteredRows)
+                    {
+                        <tr class="@(row.IsValid ? "" : "row-error")">
+                            <td>@row.RowNumber</td>
+                            <td><strong>@row.MemberCode</strong></td>
+                            <td>@row.MemberName</td>
+                            <td>@row.CardNo</td>
+                            <td class="num">@row.PreviousPoint.ToString("N2")</td>
+                            <td class="num" style="@(row.TranPoint < 0 ? "color:var(--win-danger);" : "")">@row.TranPoint.ToString("N2")</td>
+                            <td class="num">@row.BalancePoint.ToString("N2")</td>
+                            <td>@row.Note</td>
+                            <td>
+                                @if (row.IsValid)
+                                {
+                                    <span class="win-badge-ok">ผ่าน</span>
+                                }
+                                else
+                                {
+                                    <span class="win-badge-err">@row.VerifyRemark</span>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(lastBatchUuid))
+    {
+        <div class="win-hint">
+            Batch UUID (SubSystemReqID): <code>@lastBatchUuid</code>
+        </div>
+    }
+}
+else if (!isBusy)
+{
+    <div class="win-empty">
+        <div class="win-empty-icon">📄</div>
+        <div class="win-empty-title">ยังไม่มีข้อมูล</div>
+        <div>กดปุ่ม <strong>เปิดไฟล์ Excel</strong> เพื่อนำเข้าและตรวจสอบข้อมูลก่อนยืนยันปรับแต้ม</div>
+    </div>
+}
+
+<div class="win-statusbar">
+    <div class="win-statusbar-section">@(isBusy ? "กำลังทำงาน..." : "พร้อม")</div>
+    <div class="win-statusbar-section">รายการ: @rows.Count</div>
+    <div class="win-statusbar-section">ผ่าน: @validCount · ไม่ผ่าน: @invalidCount</div>
+    <div class="win-statusbar-section">vtecPoint v1.0</div>
+</div>
+
+@if (showModal)
+{
+    <div class="win-modal-backdrop" @onclick="CloseModal">
+        <div class="win-modal" @onclick:stopPropagation="true">
+            <div class="win-modal-header">
+                <div class="win-modal-icon @(modalSuccess ? "success" : "fail")">
+                    @(modalSuccess ? "✓" : "✕")
+                </div>
+                <h3 class="win-modal-title">@(modalSuccess ? "สำเร็จ" : "ไม่สำเร็จ")</h3>
+            </div>
+            <div class="win-modal-body">@modalMessage</div>
+            <div class="win-modal-footer">
+                <button class="win-btn win-btn-primary" @onclick="CloseModal">ตกลง</button>
+            </div>
+        </div>
+    </div>
+}
+
+@code {
+    private AdjustPointSettings settings = new();
+    private List<PointTypeOption> pointTypes = new();
+    private List<AdjustPointRow> rows = new();
+    private string filterMode = "all";
+    private bool isBusy;
+    private string statusMessage = "";
+    private string statusClass = "win-message-info";
+    private string lastBatchUuid = "";
+    private string selectedFileName = "";
+    private bool showModal;
+    private bool modalSuccess;
+    private string modalMessage = "";
+
+    private int validCount => rows.Count(r => r.IsValid);
+    private int invalidCount => rows.Count(r => !r.IsValid);
+    private decimal totalTranPoint => rows.Where(r => r.IsValid).Sum(r => r.TranPoint);
+    private bool canConfirm => rows.Count > 0 && invalidCount == 0;
+
+    private IEnumerable<AdjustPointRow> FilteredRows => filterMode switch
+    {
+        "valid" => rows.Where(r => r.IsValid),
+        "invalid" => rows.Where(r => !r.IsValid),
+        _ => rows
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        var section = Configuration.GetSection("AdjustPoint");
+        settings.PointType = section.GetValue("PointType", 6);
+        settings.SyncStatus = section.GetValue("SyncStatus", 0);
+        settings.ShopId = section.GetValue("ShopId", 0);
+
+        await LoadStaffFromLoginAsync();
+        pointTypes = await PointAdjustService.GetPointTypesAsync();
+        if (!pointTypes.Any(p => p.Id == settings.PointType))
+            settings.PointType = pointTypes.FirstOrDefault()?.Id ?? 6;
+    }
+
+    private async Task LoadStaffFromLoginAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+        if (user.Identity?.IsAuthenticated == true)
+        {
+            if (int.TryParse(user.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var staffId))
+                settings.StaffId = staffId;
+            settings.StaffName = user.FindFirst(ClaimTypes.Name)?.Value ?? "Admin";
+        }
+    }
+
+    private async Task OnFileSelected(InputFileChangeEventArgs e)
+    {
+        ResetMessages();
+        isBusy = true;
+        lastBatchUuid = "";
+
+        try
+        {
+            var file = e.File;
+            selectedFileName = file.Name;
+            await using var stream = file.OpenReadStream(maxAllowedSize: 50 * 1024 * 1024);
+            using var ms = new MemoryStream();
+            await stream.CopyToAsync(ms);
+            ms.Position = 0;
+
+            rows = PointAdjustService.ParseExcel(ms);
+            if (rows.Count == 0)
+            {
+                ShowMessage("ไม่พบข้อมูลในไฟล์", "win-message-warning");
+                return;
+            }
+
+            rows = await PointAdjustService.VerifyAsync(rows);
+            ShowMessage($"อ่านไฟล์ {file.Name} สำเร็จ — {rows.Count} รายการ (ผ่าน {validCount}, ไม่ผ่าน {invalidCount})",
+                invalidCount > 0 ? "win-message-warning" : "win-message-success");
+        }
+        catch (Exception ex)
+        {
+            rows.Clear();
+            selectedFileName = "";
+            ShowMessage(ex.Message, "win-message-danger");
+        }
+        finally
+        {
+            isBusy = false;
+        }
+    }
+
+    private async Task VerifyAsync()
+    {
+        if (rows.Count == 0) return;
+
+        ResetMessages();
+        isBusy = true;
+        try
+        {
+            foreach (var row in rows)
+                row.HistoryUuid = Guid.NewGuid().ToString().ToUpper();
+
+            rows = await PointAdjustService.VerifyAsync(rows);
+            ShowMessage($"ตรวจสอบแล้ว — ผ่าน {validCount}, ไม่ผ่าน {invalidCount}",
+                invalidCount > 0 ? "win-message-warning" : "win-message-success");
+        }
+        catch (Exception ex)
+        {
+            ShowMessage(ex.Message, "win-message-danger");
+        }
+        finally
+        {
+            isBusy = false;
+        }
+    }
+
+    private async Task ConfirmAsync()
+    {
+        if (!canConfirm) return;
+
+        ResetMessages();
+        isBusy = true;
+        try
+        {
+            await LoadStaffFromLoginAsync();
+            var result = await PointAdjustService.ConfirmAsync(rows, settings);
+            if (result.Success)
+            {
+                lastBatchUuid = result.BatchUuid;
+                ShowModal(true, $"ปรับแต้มสำเร็จ\n\n{result.Message}\nBatch: {result.BatchUuid}");
+                rows.Clear();
+                selectedFileName = "";
+            }
+            else
+            {
+                ShowModal(false, result.Message);
+            }
+        }
+        catch (Exception ex)
+        {
+            ShowModal(false, ex.Message);
+        }
+        finally
+        {
+            isBusy = false;
+        }
+    }
+
+    private void Reset()
+    {
+        rows.Clear();
+        selectedFileName = "";
+        lastBatchUuid = "";
+        ResetMessages();
+    }
+
+    private void ResetMessages()
+    {
+        statusMessage = "";
+        statusClass = "win-message-info";
+    }
+
+    private void ShowMessage(string message, string cssClass)
+    {
+        statusMessage = message;
+        statusClass = cssClass;
+    }
+
+    private void ShowModal(bool success, string message)
+    {
+        modalSuccess = success;
+        modalMessage = message;
+        showModal = true;
+    }
+
+    private void CloseModal() => showModal = false;
+}

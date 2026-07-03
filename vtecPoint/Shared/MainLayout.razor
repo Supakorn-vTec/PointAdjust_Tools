@@ -1,0 +1,38 @@
+﻿@inherits LayoutComponentBase
+@inject IConfiguration Configuration
+
+<PageTitle>vtecPoint — Adjust Point</PageTitle>
+
+<div class="win-shell">
+    <header class="win-titlebar">
+        <div class="win-titlebar-icon"></div>
+        <span class="win-titlebar-title">ปรับแต้มสมาชิก</span>
+        <span class="win-titlebar-db">@dbName</span>
+        <AuthorizeView>
+            <Authorized>
+                <span class="win-titlebar-spacer"></span>
+                <span class="win-titlebar-user">@context.User.Identity?.Name</span>
+                <a href="/account/logout" class="win-btn win-btn-logout">ออกจากระบบ</a>
+            </Authorized>
+        </AuthorizeView>
+    </header>
+
+    <div class="win-body">
+        <div class="win-main">
+            <div class="win-content">
+                @Body
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string dbName = "";
+
+    protected override void OnInitialized()
+    {
+        var conn = Configuration.GetSection("Database")["ConnectionString"] ?? "";
+        var match = System.Text.RegularExpressions.Regex.Match(conn, @"Initial Catalog=([^;]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+        dbName = match.Success ? match.Groups[1].Value : "—";
+    }
+}

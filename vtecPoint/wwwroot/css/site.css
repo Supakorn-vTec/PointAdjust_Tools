@@ -1,0 +1,40 @@
+@import url('winapp.css');
+
+/* Blazor validation */
+.valid.modified:not([type=checkbox]) { outline: 1px solid #0f7b0f; }
+.invalid { outline: 1px solid #c42b1c; }
+.validation-message { color: #c42b1c; font-size: 12px; }
+
+#blazor-error-ui {
+    background: #fff4ce;
+    bottom: 0;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.15);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+    font-family: var(--win-font);
+    font-size: 13px;
+    border-top: 1px solid #e8d48a;
+}
+
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+
+.blazor-error-boundary {
+    background: #fde7e9;
+    padding: 1rem;
+    color: #8a1a1a;
+    border: 1px solid #f1aeb5;
+    border-radius: 4px;
+}
+
+.blazor-error-boundary::after {
+    content: "เกิดข้อผิดพลาดในระบบ";
+}

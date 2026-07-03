@@ -1,0 +1,621 @@
+:root {
+    --app-bg: #f5f5f5;
+    --app-surface: #ffffff;
+    --app-surface-hover: #f8f8f8;
+    --app-border: #e0e0e0;
+    --app-border-subtle: #edebe9;
+    --app-text: #242424;
+    --app-text-secondary: #616161;
+    --app-text-muted: #8a8886;
+    --app-accent: #5b5fc7;
+    --app-accent-hover: #4f52b2;
+    --app-accent-light: #e8ebfa;
+    --app-accent-text: #444791;
+    --app-danger: #d13438;
+    --app-danger-hover: #a4262c;
+    --app-danger-light: #fde7e9;
+    --app-success: #107c10;
+    --app-success-light: #dff6dd;
+    --app-warning-light: #fff4ce;
+    --app-info-light: #e8f4fd;
+    --app-shadow-sm: 0 1.6px 3.6px rgba(0,0,0,.06), 0 0.3px 0.9px rgba(0,0,0,.04);
+    --app-shadow-md: 0 6.4px 14.4px rgba(0,0,0,.08), 0 1.2px 3.6px rgba(0,0,0,.05);
+    --app-radius: 8px;
+    --app-radius-pill: 20px;
+    --app-font: "Segoe UI Variable", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    height: 100%;
+    font-family: var(--app-font);
+    font-size: 14px;
+    color: var(--app-text);
+    background: var(--app-bg);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ── App shell (Teams-style, no sidebar) ── */
+.win-shell {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: var(--app-bg);
+}
+
+.win-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 24px;
+    background: var(--app-surface);
+    border-bottom: 1px solid var(--app-border-subtle);
+    box-shadow: var(--app-shadow-sm);
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.win-titlebar-icon {
+    width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #5b5fc7 0%, #7b83eb 100%);
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(91, 95, 199, 0.35);
+}
+
+.win-titlebar-icon::after {
+    content: "V";
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.win-titlebar-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--app-text);
+    letter-spacing: -0.01em;
+}
+
+.win-titlebar-db {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--app-accent-text);
+    background: var(--app-accent-light);
+    padding: 4px 12px;
+    border-radius: var(--app-radius-pill);
+}
+
+.win-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.win-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.win-content {
+    flex: 1;
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 24px 32px 16px;
+}
+
+/* hide old nav */
+.win-nav { display: none !important; }
+
+/* ── Command bar ── */
+.win-toolbar {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px 20px;
+    background: var(--app-surface);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow-sm);
+    margin-bottom: 20px;
+    border: 1px solid var(--app-border-subtle);
+}
+
+.win-toolbar-sep {
+    width: 1px;
+    height: 28px;
+    background: var(--app-border);
+    margin: 0 4px;
+}
+
+/* ── Buttons (Fluent pill style) ── */
+.win-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 16px;
+    font-family: var(--app-font);
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid var(--app-border);
+    border-radius: var(--app-radius-pill);
+    background: var(--app-surface);
+    color: var(--app-text);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.win-btn:hover:not(:disabled) {
+    background: var(--app-surface-hover);
+    border-color: #c8c6c4;
+}
+
+.win-btn:active:not(:disabled) {
+    background: #f0f0f0;
+}
+
+.win-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.win-btn-primary,
+.win-btn.win-btn-primary {
+    background: var(--app-accent);
+    border-color: var(--app-accent);
+    color: #fff;
+}
+
+.win-btn-primary:hover:not(:disabled) {
+    background: var(--app-accent-hover);
+    border-color: var(--app-accent-hover);
+    color: #fff;
+}
+
+.win-btn-danger {
+    background: var(--app-danger);
+    border-color: var(--app-danger);
+    color: #fff;
+}
+
+.win-btn-danger:hover:not(:disabled) {
+    background: var(--app-danger-hover);
+    border-color: var(--app-danger-hover);
+    color: #fff;
+}
+
+/* ── Cards ── */
+.win-groupbox {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border-subtle);
+    border-radius: var(--app-radius);
+    margin-bottom: 20px;
+    box-shadow: var(--app-shadow-sm);
+    overflow: hidden;
+}
+
+.win-groupbox-header {
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--app-text);
+    background: var(--app-surface);
+    border-bottom: 1px solid var(--app-border-subtle);
+}
+
+.win-groupbox-body {
+    padding: 20px;
+}
+
+/* ── Form fields ── */
+.win-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.win-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--app-text-secondary);
+}
+
+.win-input,
+.win-select {
+    height: 36px;
+    padding: 0 12px;
+    font-family: var(--app-font);
+    font-size: 14px;
+    border: 1px solid var(--app-border);
+    border-radius: 6px;
+    background: var(--app-surface);
+    color: var(--app-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.win-input:focus,
+.win-select:focus {
+    outline: none;
+    border-color: var(--app-accent);
+    box-shadow: 0 0 0 1px var(--app-accent);
+}
+
+.win-file-name {
+    height: 36px;
+    line-height: 34px;
+    padding: 0 12px;
+    background: var(--app-bg);
+    border: 1px dashed var(--app-border);
+    border-radius: 6px;
+    color: var(--app-text-muted);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 13px;
+}
+
+.win-form-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+}
+
+/* ── Stat cards ── */
+.win-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.win-stat {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border-subtle);
+    border-radius: var(--app-radius);
+    padding: 16px 20px;
+    box-shadow: var(--app-shadow-sm);
+    transition: box-shadow 0.15s;
+}
+
+.win-stat:hover {
+    box-shadow: var(--app-shadow-md);
+}
+
+.win-stat-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--app-text-muted);
+    margin-bottom: 8px;
+}
+
+.win-stat-value {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+}
+
+.win-stat-value.accent { color: var(--app-accent); }
+.win-stat-value.success { color: var(--app-success); }
+.win-stat-value.danger { color: var(--app-danger); }
+
+/* ── Messages ── */
+.win-message {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    border-radius: var(--app-radius);
+    margin-bottom: 20px;
+    font-size: 14px;
+    border: none;
+}
+
+.win-message-info { background: var(--app-info-light); color: #003d6b; }
+.win-message-success { background: var(--app-success-light); color: #0e5814; }
+.win-message-warning { background: var(--app-warning-light); color: #5c4a00; }
+.win-message-danger { background: var(--app-danger-light); color: #8a1a1a; }
+
+.win-spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--app-accent-light);
+    border-top-color: var(--app-accent);
+    border-radius: 50%;
+    animation: app-spin 0.7s linear infinite;
+    flex-shrink: 0;
+}
+
+@keyframes app-spin { to { transform: rotate(360deg); } }
+
+/* ── Data grid ── */
+.win-grid-wrap {
+    background: var(--app-surface);
+    border: 1px solid var(--app-border-subtle);
+    border-radius: var(--app-radius);
+    box-shadow: var(--app-shadow-sm);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.win-grid-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    background: var(--app-surface);
+    border-bottom: 1px solid var(--app-border-subtle);
+}
+
+.win-grid-toolbar-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--app-text);
+}
+
+.win-grid-scroll {
+    max-height: 440px;
+    overflow: auto;
+}
+
+.win-grid {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.win-grid thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--app-bg);
+    border-bottom: 1px solid var(--app-border);
+    padding: 10px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--app-text-secondary);
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.win-grid thead th.num { text-align: right; }
+
+.win-grid tbody td {
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--app-border-subtle);
+    vertical-align: middle;
+}
+
+.win-grid tbody td.num {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+}
+
+.win-grid tbody tr:hover { background: var(--app-accent-light); }
+.win-grid tbody tr.row-error { background: var(--app-danger-light) !important; }
+.win-grid tbody tr.row-error:hover { background: #fcd5d8 !important; }
+
+.win-badge-ok {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--app-radius-pill);
+    background: var(--app-success-light);
+    color: var(--app-success);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.win-badge-err {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--app-radius-pill);
+    background: var(--app-danger-light);
+    color: var(--app-danger);
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ── Empty state ── */
+.win-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 64px 32px;
+    background: var(--app-surface);
+    border: 2px dashed var(--app-border);
+    border-radius: var(--app-radius);
+    color: var(--app-text-muted);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.win-empty-icon {
+    width: 64px;
+    height: 64px;
+    background: var(--app-accent-light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    margin-bottom: 16px;
+}
+
+.win-empty-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--app-text);
+    margin-bottom: 8px;
+}
+
+/* ── Status bar ── */
+.win-statusbar {
+    display: flex;
+    align-items: center;
+    height: 32px;
+    background: var(--app-surface);
+    border-top: 1px solid var(--app-border-subtle);
+    font-size: 12px;
+    color: var(--app-text-muted);
+    flex-shrink: 0;
+    margin-top: auto;
+}
+
+.win-statusbar-section {
+    padding: 0 16px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--app-border-subtle);
+}
+
+.win-statusbar-section:last-child {
+    margin-left: auto;
+    border-right: none;
+    border-left: 1px solid var(--app-border-subtle);
+}
+
+.win-hint {
+    font-size: 13px;
+    color: var(--app-text-secondary);
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--app-bg);
+    border-radius: 6px;
+}
+
+.win-hint code {
+    background: var(--app-accent-light);
+    color: var(--app-accent-text);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+@media (max-width: 900px) {
+    .win-form-grid { grid-template-columns: repeat(2, 1fr); }
+    .win-stats { grid-template-columns: repeat(2, 1fr); }
+    .win-content { padding: 16px; }
+}
+
+/* ── Login page ── */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(160deg, #f0f0f5 0%, #e8ebfa 50%, #f5f5f5 100%);
+    padding: 24px;
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    background: var(--app-surface);
+    border-radius: 12px;
+    box-shadow: var(--app-shadow-md);
+    border: 1px solid var(--app-border-subtle);
+    padding: 36px 32px;
+}
+
+.login-brand {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.login-logo {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 12px;
+    background: linear-gradient(135deg, #5b5fc7 0%, #7b83eb 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    box-shadow: 0 4px 12px rgba(91, 95, 199, 0.35);
+}
+
+.login-brand h1 {
+    margin: 0 0 4px;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--app-text);
+}
+
+.login-brand p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--app-text-muted);
+}
+
+.login-field {
+    margin-bottom: 16px;
+}
+
+.login-field label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--app-text-secondary);
+    margin-bottom: 6px;
+}
+
+.login-field .win-input {
+    width: 100%;
+}
+
+.login-error {
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    background: var(--app-danger-light);
+    color: var(--app-danger);
+    border-radius: 6px;
+    font-size: 13px;
+    text-align: center;
+}
+
+.login-submit {
+    width: 100%;
+    height: 40px;
+    justify-content: center;
+    font-size: 15px;
+    margin-top: 4px;
+}
+
+.win-titlebar-spacer { flex: 1; }
+
+.win-titlebar-user {
+    font-size: 13px;
+    color: var(--app-text-secondary);
+    margin-left: auto;
+    margin-right: 12px;
+}
+
+.win-btn-logout {
+    height: 28px;
+    padding: 0 12px;
+    font-size: 12px;
+    text-decoration: none;
+    color: var(--app-text);
+}
+
