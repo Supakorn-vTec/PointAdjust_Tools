@@ -1,10 +1,10 @@
-d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.exe
+d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.Server.exe
 d:\VTEC\vtecPoint\release\vtecPoint\appsettings.Development.json
 d:\VTEC\vtecPoint\release\vtecPoint\appsettings.json
-d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.dll
-d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.deps.json
-d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.runtimeconfig.json
-d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.pdb
+d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.Server.dll
+d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.Server.deps.json
+d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.Server.runtimeconfig.json
+d:\VTEC\vtecPoint\release\vtecPoint\vtecPoint.Server.pdb
 d:\VTEC\vtecPoint\release\vtecPoint\Microsoft.CSharp.dll
 d:\VTEC\vtecPoint\release\vtecPoint\Microsoft.VisualBasic.Core.dll
 d:\VTEC\vtecPoint\release\vtecPoint\Microsoft.VisualBasic.dll

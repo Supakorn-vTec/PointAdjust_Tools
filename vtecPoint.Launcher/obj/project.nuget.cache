@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "s/NsfuFrNz0=",
+  "success": true,
+  "projectFilePath": "d:\\VTEC\\vtecPoint\\vtecPoint.Launcher\\vtecPoint.Launcher.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b5ad6e6308970fe0697ef0bc4f5d3838\\nuget\\microsoft.web.webview2\\1.0.2957.106\\microsoft.web.webview2.1.0.2957.106.nupkg.sha512",
+    "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b5ad6e6308970fe0697ef0bc4f5d3838\\nuget\\microsoft.netcore.app.runtime.win-x64\\8.0.10\\microsoft.netcore.app.runtime.win-x64.8.0.10.nupkg.sha512",
+    "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b5ad6e6308970fe0697ef0bc4f5d3838\\nuget\\microsoft.windowsdesktop.app.runtime.win-x64\\8.0.10\\microsoft.windowsdesktop.app.runtime.win-x64.8.0.10.nupkg.sha512",
+    "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b5ad6e6308970fe0697ef0bc4f5d3838\\nuget\\microsoft.aspnetcore.app.runtime.win-x64\\8.0.10\\microsoft.aspnetcore.app.runtime.win-x64.8.0.10.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj": {}
+    "d:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj": {}
   },
   "projects": {
-    "D:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj": {
+    "d:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj",
-        "projectName": "vtecPoint",
-        "projectPath": "D:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj",
-        "packagesPath": "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\efb40ecd0bb0aa65f5934b9a839ed58f\\nuget",
-        "outputPath": "D:\\VTEC\\vtecPoint\\vtecPoint\\obj\\",
+        "projectUniqueName": "d:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj",
+        "projectName": "vtecPoint.Server",
+        "projectPath": "d:\\VTEC\\vtecPoint\\vtecPoint\\vtecPoint.csproj",
+        "packagesPath": "C:\\Users\\Thinkpad\\AppData\\Local\\Temp\\cursor-sandbox-cache\\b5ad6e6308970fe0697ef0bc4f5d3838\\nuget",
+        "outputPath": "d:\\VTEC\\vtecPoint\\vtecPoint\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\DevExpress 21.2\\Components\\Offline Packages",
@@ -85,6 +85,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[8.0.10, 8.0.10]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -94,6 +108,11 @@
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }

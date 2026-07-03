@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\vtecPoint.Server.props" />
+</Project>

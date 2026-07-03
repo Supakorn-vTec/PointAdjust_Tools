@@ -1,79 +1,79 @@
 {
   "Files": [
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\obj\\Release\\net8.0\\win-x64\\scopedcss\\projectbundle\\vtecPoint.bundle.scp.css",
-      "PackagePath": "staticwebassets\\vtecPoint.bundle.scp.css"
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\obj\\Release\\net8.0\\win-x64\\scopedcss\\projectbundle\\vtecPoint.Server.bundle.scp.css",
+      "PackagePath": "staticwebassets\\vtecPoint.Server.bundle.scp.css"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\FONT-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\ICON-LICENSE",
       "PackagePath": "staticwebassets\\css\\open-iconic"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\README.md",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\README.md",
       "PackagePath": "staticwebassets\\css\\open-iconic\\README.md"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\css\\open-iconic-bootstrap.min.css"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.eot",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.eot"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.otf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.otf"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.svg",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.svg"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.ttf",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.ttf"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\open-iconic\\font\\fonts\\open-iconic.woff",
       "PackagePath": "staticwebassets\\css\\open-iconic\\font\\fonts\\open-iconic.woff"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\site.css",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\winapp.css",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\css\\winapp.css",
       "PackagePath": "staticwebassets\\css\\winapp.css"
     },
     {
-      "Id": "D:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\favicon.ico",
+      "Id": "d:\\VTEC\\vtecPoint\\vtecPoint\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.build.vtecPoint.props",
-      "PackagePath": "build\\vtecPoint.props"
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.build.vtecPoint.Server.props",
+      "PackagePath": "build\\vtecPoint.Server.props"
     },
     {
-      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildMultiTargeting.vtecPoint.props",
-      "PackagePath": "buildMultiTargeting\\vtecPoint.props"
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildMultiTargeting.vtecPoint.Server.props",
+      "PackagePath": "buildMultiTargeting\\vtecPoint.Server.props"
     },
     {
-      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildTransitive.vtecPoint.props",
-      "PackagePath": "buildTransitive\\vtecPoint.props"
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.buildTransitive.vtecPoint.Server.props",
+      "PackagePath": "buildTransitive\\vtecPoint.Server.props"
     },
     {
-      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.vtecPoint.Microsoft.AspNetCore.StaticWebAssets.props",
+      "Id": "obj\\Release\\net8.0\\win-x64\\staticwebassets\\msbuild.vtecPoint.Server.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     }
   ],

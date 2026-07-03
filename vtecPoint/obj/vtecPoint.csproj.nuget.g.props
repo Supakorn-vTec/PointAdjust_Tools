@@ -4,13 +4,13 @@
     <RestoreSuccess Condition=" '$(RestoreSuccess)' == '' ">True</RestoreSuccess>
     <RestoreTool Condition=" '$(RestoreTool)' == '' ">NuGet</RestoreTool>
     <ProjectAssetsFile Condition=" '$(ProjectAssetsFile)' == '' ">$(MSBuildThisFileDirectory)project.assets.json</ProjectAssetsFile>
-    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\AppData\Local\Temp\cursor-sandbox-cache\efb40ecd0bb0aa65f5934b9a839ed58f\nuget</NuGetPackageRoot>
-    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Thinkpad\AppData\Local\Temp\cursor-sandbox-cache\efb40ecd0bb0aa65f5934b9a839ed58f\nuget;C:\Program Files (x86)\DevExpress 21.2\Components\Offline Packages;C:\Program Files\DevExpress 24.1\Components\Offline Packages;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
+    <NuGetPackageRoot Condition=" '$(NuGetPackageRoot)' == '' ">$(UserProfile)\AppData\Local\Temp\cursor-sandbox-cache\b5ad6e6308970fe0697ef0bc4f5d3838\nuget</NuGetPackageRoot>
+    <NuGetPackageFolders Condition=" '$(NuGetPackageFolders)' == '' ">C:\Users\Thinkpad\AppData\Local\Temp\cursor-sandbox-cache\b5ad6e6308970fe0697ef0bc4f5d3838\nuget;C:\Program Files (x86)\DevExpress 21.2\Components\Offline Packages;C:\Program Files\DevExpress 24.1\Components\Offline Packages;C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages</NuGetPackageFolders>
     <NuGetProjectStyle Condition=" '$(NuGetProjectStyle)' == '' ">PackageReference</NuGetProjectStyle>
     <NuGetToolVersion Condition=" '$(NuGetToolVersion)' == '' ">6.11.1</NuGetToolVersion>
   </PropertyGroup>
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
-    <SourceRoot Include="C:\Users\Thinkpad\AppData\Local\Temp\cursor-sandbox-cache\efb40ecd0bb0aa65f5934b9a839ed58f\nuget\" />
+    <SourceRoot Include="C:\Users\Thinkpad\AppData\Local\Temp\cursor-sandbox-cache\b5ad6e6308970fe0697ef0bc4f5d3838\nuget\" />
     <SourceRoot Include="C:\Program Files (x86)\DevExpress 21.2\Components\Offline Packages\" />
     <SourceRoot Include="C:\Program Files\DevExpress 24.1\Components\Offline Packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
